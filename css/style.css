@@ -1,6 +1,12 @@
 :root {
     --primary-color: rgba(39, 66, 218, 0.76);
     --secondary-color: rgba(206, 222, 255, 0.822);
+
+    --correct-primary-color: rgba(25, 122, 74, 0.76);
+    --correct-secondary-color: rgba(117, 224, 171, 0.76);
+
+    --incorrect-primary-color: rgba(122, 25, 25, 0.76);
+    --incorrect-secondary-color: rgba(224, 117, 117, 0.76);
 }
 
 
@@ -12,10 +18,10 @@ html {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    gap: 20px;
+    gap: 30px;
     flex-wrap: wrap;
-    padding: 20px;
-    border-radius: 100px;
+    padding: 30px;
+    border-radius: 50px;
     margin: 20px;
     color: var(--primary-color);
     border: 2px solid;
@@ -34,6 +40,30 @@ html {
     align-items: center;
 }
 
+.correct {
+    color: var(--correct-primary-color);
+    background-color: var(--correct-secondary-color);
+}
+
+.incorrect {
+    color: var(--incorrect-primary-color);
+    background-color: var(--incorrect-secondary-color);
+}
+
+.final-score {
+    text-align: center;
+    font-size: 50px;
+    color: var(--primary-color);
+    text-transform: uppercase;
+}
+
+.original-numbers {
+    text-align: center;
+    font-size: 30px;
+    color: var(--primary-color);
+    text-transform: uppercase;
+}
+
 .button {
     color: var(--primary-color);
     font-weight: bold;
@@ -46,7 +76,7 @@ html {
     cursor: pointer;
 }
 
-.start-button:hover {
+.button:hover {
     color: var(--secondary-color);
     background-color: var(--primary-color);
 }

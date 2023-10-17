@@ -1,69 +1,131 @@
-let newWrapper
-let newDiv
-let newButton
-
-newWrapper = document.createElement("div")
-document.body.append(newWrapper)
-newWrapper.className = "flex-wrapper"
 
 
 
-newButton = document.createElement("button")
-newWrapper.append(newButton)
-newButton.className = "button"
-newButton.id = "generate-numbers"
-newButton.innerHTML = "Generate Numbers"
 
-newButton = document.createElement("button")
-newWrapper.append(newButton)
-newButton.className = "button"
-newButton.id = "start-game"
-newButton.innerHTML = "Start Game"
+// Variables
+const buttonWrapper = createDOMobject("div", document.body, "flex-wrapper", "button-wrapper", "")
+const numberButton = createDOMobject("button", buttonWrapper, "button", "generate-numbers", "Generate Numbers")
+const startButton = createDOMobject("button", buttonWrapper, "button", "start-game", "Start Game")
 
-newWrapper = document.createElement("div")
-document.body.append(newWrapper)
-newWrapper.className = "flex-wrapper"
+let randomNumbers
 
-document.getElementById("generate-numbers").addEventListener("click", () => {
 
-    newWrapper.innerHTML = ""
+numberButton.addEventListener("click", () => {
+
+    clearHTMLnumbers()
+    clearHTMLscore()
+    displayRandomNumbers()
+
+})
+
+
+startButton.addEventListener("click", () => {
+
+    clearHTMLscore()
+
+    const numberedCircles = document.querySelectorAll(".random-numbers")
+    numberedCircles.forEach(circle => {
+        circle.innerHTML = ""
+    });
+
+    setTimeout(() => {
+
+        const userNumbers = getUserNumbers()
+        getUserScore(userNumbers)
+
+    }, 1000);
+
+})
+
+
+function clearHTMLnumbers() {
+
+    const numberWrapper = document.getElementById("number-wrapper")
+    if (numberWrapper) { numberWrapper.remove() }
+
+}
+
+function clearHTMLscore() {
+
+    const finalScore = document.getElementById("final-score")
+    const originalNumbers = document.getElementById("original-numbers")
+    if (finalScore) { finalScore.remove() }
+    if (originalNumbers) { originalNumbers.remove() }
+
+}
+
+function displayRandomNumbers() {
+
+    const numberWrapper = createDOMobject("div", document.body, "flex-wrapper", "number-wrapper", "")
 
     randomNumbers = randArray(1, 100, 5)
-
+    console.log(randomNumbers)
 
     for (i = 0; i < randomNumbers.length; i++) {
-        newDiv = document.createElement("div")
-        newWrapper.append(newDiv)
-        newDiv.className = "random-numbers"
-        newDiv.innerHTML = randomNumbers[i]
+        createDOMobject("div", numberWrapper, "random-numbers", i, randomNumbers[i])
     }
 
-})
-
-document.getElementById("start-game").addEventListener("click", () => {
-
-    newWrapper.innerHTML = ""
+    return randomNumbers
+}
 
 
+function getUserNumbers() {
 
-})
+    const userNumbers = []
+    let n = 0
+
+    while (userNumbers.length < 5) {
+        n++
+        userNumbers.push(parseInt(prompt("What numbers where on screen? " + n + "/" + i)))
+    }
+
+    return userNumbers
+}
 
 
-// setTimeout(() => {
+function getUserScore(array) {
 
-//     newWrapper = document.createElement("div")
-//     document.body.append(newWrapper)
-//     newWrapper.className = "flex-wrapper"
+    const numberCircles = document.querySelectorAll(".random-numbers")
 
-//     newDiv = document.createElement("div")
-//     newWrapper.append(newDiv)
-//     newDiv.className = "random-numbers"
+    let score = 0
 
-// }, 1000);
+    array.forEach((number, i) => {
 
+        number ? numberCircles[i].innerHTML = number : numberCircles[i].innerHTML = ""
+
+        if (randomNumbers.includes(number)) {
+            score++
+            numberCircles[i].classList.remove("incorrect")
+            numberCircles[i].classList.add("correct")
+            console.log(number, "yes! score is = " + score)
+
+        } else {
+            numberCircles[i].classList.remove("correct")
+            numberCircles[i].classList.add("incorrect")
+            console.log(number, "no! score is = " + score)
+        }
+
+
+    });
+
+    createDOMobject("h1", document.body, "final-score", "final-score", "Final Score = " + score)
+    createDOMobject("h3", document.body, "original-numbers", "original-numbers", "(" + randomNumbers + ")")
+}
 
 
 /* ---------------------------------- FUNCTIONS ---------------------------------- */
+
+
+function createDOMobject(type, location, className, id, inner) {
+
+    const DOMobject = document.createElement(type)
+    location.append(DOMobject)
+    DOMobject.className = className
+    DOMobject.id = id
+    DOMobject.innerHTML = inner
+    return DOMobject
+
+}
 
 
 // Random Array Function
