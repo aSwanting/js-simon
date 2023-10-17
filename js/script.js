@@ -1,51 +1,55 @@
 
-
-
-
 // Variables
 const buttonWrapper = createDOMobject("div", document.body, "flex-wrapper", "button-wrapper", "")
 const numberButton = createDOMobject("button", buttonWrapper, "button", "generate-numbers", "Generate Numbers")
 const startButton = createDOMobject("button", buttonWrapper, "button", "start-game", "Start Game")
-
 let randomNumbers
 
 
+// onClick clears html if needed, prints random numbers
 numberButton.addEventListener("click", () => {
 
     clearHTMLnumbers()
-    clearHTMLscore()
+    clearHTMLpostGame()
     displayRandomNumbers()
 
 })
 
-
+// onClick hides numbers, after delay prompts user input
 startButton.addEventListener("click", () => {
 
-    clearHTMLscore()
+    clearHTMLpostGame()
 
     const numberedCircles = document.querySelectorAll(".random-numbers")
     numberedCircles.forEach(circle => {
         circle.innerHTML = ""
     });
-
+    
     setTimeout(() => {
-
+        
         const userNumbers = getUserNumbers()
         getUserScore(userNumbers)
-
-    }, 1000);
+        
+    }, 30000);
 
 })
 
 
+
+/* ---------------------------------- FUNCTIONS ---------------------------------- */
+
+
+// Clear Randomly Generate Numbers
 function clearHTMLnumbers() {
 
     const numberWrapper = document.getElementById("number-wrapper")
     if (numberWrapper) { numberWrapper.remove() }
-
+    
 }
 
-function clearHTMLscore() {
+
+// Remove Score and Info
+function clearHTMLpostGame() {
 
     const finalScore = document.getElementById("final-score")
     const originalNumbers = document.getElementById("original-numbers")
@@ -54,6 +58,8 @@ function clearHTMLscore() {
 
 }
 
+
+// Create divs, generate and print random numbers
 function displayRandomNumbers() {
 
     const numberWrapper = createDOMobject("div", document.body, "flex-wrapper", "number-wrapper", "")
@@ -69,6 +75,7 @@ function displayRandomNumbers() {
 }
 
 
+// User inputs numbers, store in array
 function getUserNumbers() {
 
     const userNumbers = []
@@ -83,6 +90,7 @@ function getUserNumbers() {
 }
 
 
+// Get and Print user Score
 function getUserScore(array) {
 
     const numberCircles = document.querySelectorAll(".random-numbers")
@@ -105,7 +113,6 @@ function getUserScore(array) {
             console.log(number, "no! score is = " + score)
         }
 
-
     });
 
     createDOMobject("h1", document.body, "final-score", "final-score", "Final Score = " + score)
@@ -113,9 +120,7 @@ function getUserScore(array) {
 }
 
 
-/* ---------------------------------- FUNCTIONS ---------------------------------- */
-
-
+// Function to create DOM element
 function createDOMobject(type, location, className, id, inner) {
 
     const DOMobject = document.createElement(type)
