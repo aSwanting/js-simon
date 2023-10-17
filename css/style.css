@@ -1,0 +1,52 @@
+:root {
+    --primary-color: rgba(39, 66, 218, 0.76);
+    --secondary-color: rgba(206, 222, 255, 0.822);
+}
+
+
+html {
+    font-family: sans-serif;
+}
+
+.flex-wrapper {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    padding: 20px;
+    border-radius: 100px;
+    margin: 20px;
+    color: var(--primary-color);
+    border: 2px solid;
+}
+
+.random-numbers {
+    background-color: var(--secondary-color);
+    border: 2px solid;
+    font-size: 36px;
+    font-weight: bold;
+    width: 120px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button {
+    color: var(--primary-color);
+    font-weight: bold;
+    font-size: 26px;
+    border-radius: 30px;
+    border: 2px solid;
+    background-color: var(--secondary-color);
+    padding: 10px 20px;
+    transition: 200ms all;
+    cursor: pointer;
+}
+
+.start-button:hover {
+    color: var(--secondary-color);
+    background-color: var(--primary-color);
+}
