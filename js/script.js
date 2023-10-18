@@ -21,17 +21,22 @@ startButton.addEventListener("click", () => {
 
     clearHTMLpostGame()
 
-    const numberedCircles = document.querySelectorAll(".random-numbers")
-    numberedCircles.forEach(circle => {
-        circle.innerHTML = ""
-    });
+    const numberedCircles = document.querySelectorAll(".random-numbers")   
 
-    setTimeout(() => {
+    if (numberedCircles.length) {
 
-        const userNumbers = getUserNumbers()
-        getUserScore(userNumbers)
+        numberedCircles.forEach(circle => {
+            circle.innerHTML = ""
+        });
 
-    }, 1000);
+        setTimeout(() => {
+
+            const userNumbers = getUserNumbers()
+            getUserScore(userNumbers)
+
+        }, 1000);
+
+    }
 
 })
 
@@ -120,7 +125,7 @@ function getUserScore(array) {
 
     });
 
-    createDOMobject("h1", document.body, "final-score", "final-score", "Final Score = " + score)
+    createDOMobject("h1", document.body, "final-score", "final-score", "You remembered " + score + " number(s)")
     createDOMobject("h3", document.body, "original-numbers", "original-numbers", "(" + randomNumbers + ")")
 }
 
