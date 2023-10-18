@@ -1,11 +1,11 @@
-
-// Variables
-let randomNumbers
+"use strict"
 
 
 // Initialize Toolbar
 document.addEventListener("DOMContentLoaded", () => {
 
+    // Variables
+    let randomNumbers
 
     //Build Wrapper and Buttons
     const buttonWrapper = createDOMobject("div", document.body, "flex-wrapper", "button-wrapper", "")
@@ -18,7 +18,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         clearHTMLnumbers()
         clearHTMLpostGame()
-        displayRandomNumbers()
+        randomNumbers = randArray(1, 100, 5)
+        displayRandomNumbers(randomNumbers)
 
     })
 
@@ -38,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
             setTimeout(() => {
 
                 const userNumbers = getUserNumbers()
-                getUserScore(userNumbers)
+                getUserScore(userNumbers, randomNumbers)
 
             }, 1 * 1000);
         }
@@ -71,17 +72,17 @@ function clearHTMLpostGame() {
 
 
 // Create divs, generate and print random numbers
-function displayRandomNumbers() {
+function displayRandomNumbers(randomNumbers) {
 
     const numberWrapper = createDOMobject("div", document.body, "flex-wrapper", "number-wrapper", "")
 
-    randomNumbers = randArray(1, 100, 5)
+    randomNumbers
+    console.log(randomNumbers)
 
-    for (i = 0; i < randomNumbers.length; i++) {
+    for (let i = 0; i < randomNumbers.length; i++) {
         createDOMobject("div", numberWrapper, "random-numbers", i, randomNumbers[i])
     }
 
-    return randomNumbers
 }
 
 
@@ -93,24 +94,24 @@ function getUserNumbers() {
 
     while (userNumbers.length < 5) {
         n++
-        userNumbers.push(parseInt(prompt("What numbers where on screen? " + n + "/" + i)))
+        userNumbers.push(parseInt(prompt("What numbers where on screen? " + n + "/" + 5)))
     }
-
+    console.log(userNumbers)
     return userNumbers
 }
 
 
 // Get and Print user Score
-function getUserScore(array) {
+function getUserScore(userArray, randomArray) {
 
     const numberCircles = document.querySelectorAll(".random-numbers")
     const checkedNumbers = []
 
-    array.forEach((number, i) => {
+    userArray.forEach((number, i) => {
 
         number ? numberCircles[i].innerHTML = number : numberCircles[i].innerHTML = ""
 
-        if (randomNumbers.includes(number) && !checkedNumbers.includes(number)) {
+        if (randomArray.includes(number) && !checkedNumbers.includes(number)) {
 
             numberCircles[i].classList.remove("incorrect")
             numberCircles[i].classList.add("correct")
@@ -126,7 +127,7 @@ function getUserScore(array) {
     });
 
     createDOMobject("h1", document.body, "final-score", "final-score", "You remembered " + checkedNumbers.length + " number(s)")
-    createDOMobject("h3", document.body, "original-numbers", "original-numbers", "(" + randomNumbers + ")")
+    createDOMobject("h3", document.body, "original-numbers", "original-numbers", "(" + randomArray + ")")
 }
 
 
