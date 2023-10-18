@@ -21,7 +21,7 @@ startButton.addEventListener("click", () => {
 
     clearHTMLpostGame()
 
-    const numberedCircles = document.querySelectorAll(".random-numbers")   
+    const numberedCircles = document.querySelectorAll(".random-numbers")
 
     if (numberedCircles.length) {
 
@@ -34,7 +34,7 @@ startButton.addEventListener("click", () => {
             const userNumbers = getUserNumbers()
             getUserScore(userNumbers)
 
-        }, 1000);
+        }, 30 * 1000);
 
     }
 
@@ -107,7 +107,7 @@ function getUserScore(array) {
         number ? numberCircles[i].innerHTML = number : numberCircles[i].innerHTML = ""
 
         if (randomNumbers.includes(number) && !checkedNumbers.includes(number)) {
-            
+
             numberCircles[i].classList.remove("incorrect")
             numberCircles[i].classList.add("correct")
             checkedNumbers.push(number)
