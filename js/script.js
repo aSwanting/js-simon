@@ -100,32 +100,28 @@ function getUserNumbers() {
 function getUserScore(array) {
 
     const numberCircles = document.querySelectorAll(".random-numbers")
-
-    let score = 0
-    let checkedNumber
+    const checkedNumbers = []
 
     array.forEach((number, i) => {
 
         number ? numberCircles[i].innerHTML = number : numberCircles[i].innerHTML = ""
 
-        if (randomNumbers.includes(number) && checkedNumber !== number) {
-
-            score++
+        if (randomNumbers.includes(number) && !checkedNumbers.includes(number)) {
+            
             numberCircles[i].classList.remove("incorrect")
             numberCircles[i].classList.add("correct")
-            console.log(number, "yes! score is = " + score)
+            checkedNumbers.push(number)
+            console.log(number, "yes! score is = " + checkedNumbers.length)
 
         } else {
             numberCircles[i].classList.remove("correct")
             numberCircles[i].classList.add("incorrect")
-            console.log(number, "no! score is = " + score)
+            console.log(number, "no! score is = " + checkedNumbers.length)
         }
-
-        checkedNumber = number
 
     });
 
-    createDOMobject("h1", document.body, "final-score", "final-score", "You remembered " + score + " number(s)")
+    createDOMobject("h1", document.body, "final-score", "final-score", "You remembered " + checkedNumbers.length + " number(s)")
     createDOMobject("h3", document.body, "original-numbers", "original-numbers", "(" + randomNumbers + ")")
 }
 
