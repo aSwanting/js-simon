@@ -15,6 +15,7 @@ numberButton.addEventListener("click", () => {
 
 })
 
+
 // onClick hides numbers, after delay prompts user input
 startButton.addEventListener("click", () => {
 
@@ -24,13 +25,13 @@ startButton.addEventListener("click", () => {
     numberedCircles.forEach(circle => {
         circle.innerHTML = ""
     });
-    
+
     setTimeout(() => {
-        
+
         const userNumbers = getUserNumbers()
         getUserScore(userNumbers)
-        
-    }, 30000);
+
+    }, 1000);
 
 })
 
@@ -44,7 +45,7 @@ function clearHTMLnumbers() {
 
     const numberWrapper = document.getElementById("number-wrapper")
     if (numberWrapper) { numberWrapper.remove() }
-    
+
 }
 
 
@@ -96,12 +97,14 @@ function getUserScore(array) {
     const numberCircles = document.querySelectorAll(".random-numbers")
 
     let score = 0
+    let checkedNumber
 
     array.forEach((number, i) => {
 
         number ? numberCircles[i].innerHTML = number : numberCircles[i].innerHTML = ""
 
-        if (randomNumbers.includes(number)) {
+        if (randomNumbers.includes(number) && checkedNumber !== number) {
+
             score++
             numberCircles[i].classList.remove("incorrect")
             numberCircles[i].classList.add("correct")
@@ -112,6 +115,8 @@ function getUserScore(array) {
             numberCircles[i].classList.add("incorrect")
             console.log(number, "no! score is = " + score)
         }
+
+        checkedNumber = number
 
     });
 
