@@ -1,43 +1,48 @@
 
 // Variables
-const buttonWrapper = createDOMobject("div", document.body, "flex-wrapper", "button-wrapper", "")
-const numberButton = createDOMobject("button", buttonWrapper, "button", "generate-numbers", "Generate Numbers")
-const startButton = createDOMobject("button", buttonWrapper, "button", "start-game", "Start Game")
 let randomNumbers
 
 
-// onClick clears html if needed, prints random numbers
-numberButton.addEventListener("click", () => {
-
-    clearHTMLnumbers()
-    clearHTMLpostGame()
-    displayRandomNumbers()
-
-})
+// Initialize Toolbar
+document.addEventListener("DOMContentLoaded", () => {
 
 
-// onClick hides numbers, after delay prompts user input
-startButton.addEventListener("click", () => {
+    //Build Wrapper and Buttons
+    const buttonWrapper = createDOMobject("div", document.body, "flex-wrapper", "button-wrapper", "")
+    const generateNumbersButton = createDOMobject("button", buttonWrapper, "button", "generate-numbers", "Generate Numbers")
+    const startGameButton = createDOMobject("button", buttonWrapper, "button", "start-game", "Start Game")
 
-    clearHTMLpostGame()
 
-    const numberedCircles = document.querySelectorAll(".random-numbers")
+    // onClick clears html if needed, prints random numbers
+    generateNumbersButton.addEventListener("click", () => {
 
-    if (numberedCircles.length) {
+        clearHTMLnumbers()
+        clearHTMLpostGame()
+        displayRandomNumbers()
 
-        numberedCircles.forEach(circle => {
-            circle.innerHTML = ""
-        });
+    })
 
-        setTimeout(() => {
 
-            const userNumbers = getUserNumbers()
-            getUserScore(userNumbers)
+    // onClick hides numbers, after delay prompts user input
+    startGameButton.addEventListener("click", () => {
 
-        }, 30 * 1000);
+        clearHTMLpostGame()
+        const numberedCircles = document.querySelectorAll(".random-numbers")
 
-    }
+        if (numberedCircles.length) {
 
+            numberedCircles.forEach(circle => {
+                circle.innerHTML = ""
+            });
+
+            setTimeout(() => {
+
+                const userNumbers = getUserNumbers()
+                getUserScore(userNumbers)
+
+            }, 1 * 1000);
+        }
+    })
 })
 
 
@@ -71,7 +76,6 @@ function displayRandomNumbers() {
     const numberWrapper = createDOMobject("div", document.body, "flex-wrapper", "number-wrapper", "")
 
     randomNumbers = randArray(1, 100, 5)
-    console.log(randomNumbers)
 
     for (i = 0; i < randomNumbers.length; i++) {
         createDOMobject("div", numberWrapper, "random-numbers", i, randomNumbers[i])
